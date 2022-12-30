@@ -31,7 +31,7 @@ public struct LineView: View {
         .rotation3DEffect(.degrees(180), axis: (x: 0.0, y: 1.0, z: 0.0))
         .contentShape(Rectangle())  // Control tappable area
         .gesture(lineChartController.dragGesture ?
-            LongPressGesture(minimumDuration: 0.2)
+                 LongPressGesture(minimumDuration: lineChartController.dragGestureMinimumDuration)
                 .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .local))
                 .onChanged({ value in  // Get value of the gesture
                     switch value {
@@ -72,11 +72,11 @@ public struct LineView: View {
      When the user drag on Path -> Modifiy indicator point to move it on the path accordingly
      */
     public func dragGesture(_ longPressLocation: CGPoint) {
-        let (closestXPoint, closestYPoint, yPointIndex) = getClosestValueFrom(longPressLocation, inData: pathPoints)
+        let (closestXPoint, closestYPoint, xPointIndex) = getClosestValueFrom(longPressLocation, inData: pathPoints)
         self.IndicatorPointPosition.x = closestXPoint
         self.IndicatorPointPosition.y = closestYPoint
         self.showingIndicators = true
-        self.indexPosition = yPointIndex
+        self.indexPosition = xPointIndex
     }
     
     /*
@@ -94,8 +94,8 @@ public struct LineView: View {
         let closestYPoint = yPathPoints[closestYPointIndex]
         
         // Index of the closest points in the array
-        let yPointIndex = yPathPoints.firstIndex(of: closestYPoint)!
+        let xPointIndex = xPathPoints.firstIndex(of: closestXPoint.element)!
 
-        return (closestXPoint.element, closestYPoint, yPointIndex)
+        return (closestXPoint.element, closestYPoint, xPointIndex)
     }
 }
