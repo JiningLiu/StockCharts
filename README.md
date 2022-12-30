@@ -1,19 +1,21 @@
-<a href="https://www.producthunt.com/posts/stockcharts-for-swiftui?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-stockcharts-for-swiftui" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=295975&theme=dark" alt="StockCharts for SwiftUI - Display interactive stock charts easily 🎉 | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-# SwiftUI Stock Charts 
+# StockCharts (SwiftUI)
 ![Build Status](https://github.com/denniscm190/StockCharts/actions/workflows/swift.yml/badge.svg)   
-**This package is deprecated, please see [Swift Charts](https://developer.apple.com/documentation/charts)**   
+### **This package is for iOS 14+, if your app only needs to support iOS 16 or above, please see [Swift Charts](https://developer.apple.com/documentation/charts)**   
 
 Display interactive stock charts easily 🎉
 
 ## Instalation
 - In Xcode go to `File` -> `Swift packages` -> `Add package dependency`
-- Copy and paste `https://github.com/denniscm190/StockCharts.git`
+- Copy and paste `https://github.com/JiningLiu/StockCharts.git`
 
 ## Demo app
-[**Trades** is a SwiftUI app](https://github.com/denniscm190/trades-demo) with real use cases of the StockCharts `framework`.  
+[**Trades** is a SwiftUI app](https://github.com/denniscm190/trades-demo) with real use cases of the StockCharts `framework`. 
+This demo app is based on the [original stock-charts framework](https://github.com/denniscmartin/stock-charts), a demo app for this fork is coming soon.
 
 ## Usage
+
+A wiki page for this framework is coming soon.
+
 ```swift
 import StockCharts
 ```
@@ -29,15 +31,20 @@ You can customise the line chart with `LineChartController`
 ```swift
 LineChartController(
     prices: [Double],
-    dates: [String]?, // format: yy-MM-dd
-    hours: [String]?, // has to correspond to dates
-    labelColor: Color,
-    indicatorPointColor: Color,
-    showingIndicatorLineColor: Color,
-    flatTrendLineColor: Color,
-    uptrendLineColor: Color,
-    downtrendLineColor: Color,
-    dragGesture: Bool
+    dates: [String]? = nil,
+    hours: [String]? = nil,
+    dateFormat: String = "yy-MM-dd",
+    
+    labelColor: Color = .blue,
+    labelDateFormat: DateFormatter.Style = .medium,
+    indicatorPointColor: Color = .blue,
+    showingIndicatorLineColor: Color = .blue,
+    flatTrendLineColor: Color = .purple,
+    uptrendLineColor: Color = .green,
+    downtrendLineColor: Color = .red,
+    
+    dragGesture: Bool = false,
+    dragGestureMinimumDuration: Double = 0
 )
 ```
 
