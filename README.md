@@ -1,6 +1,6 @@
 # StockCharts (SwiftUI)
 ![Build Status](https://github.com/denniscm190/StockCharts/actions/workflows/swift.yml/badge.svg)   
-##**This package is for iOS 14+, if your app only needs to support iOS 16 or above, please see [Swift Charts](https://developer.apple.com/documentation/charts)**   
+### **This package is for iOS 14+, if your app only needs to support iOS 16 or above, please see [Swift Charts](https://developer.apple.com/documentation/charts)**   
 
 Display interactive stock charts easily 🎉
 
