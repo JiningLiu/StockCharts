@@ -14,34 +14,35 @@ public struct ChartLabel: View {
     
     public var body: some View {
         HStack {
-            if let dates = lineChartController.dates {
+            
+            if let dates = lineChartController.dates, dates.count > indexPosition {
                 let date = formatStringDate(dates[indexPosition])
                 Text(date)
                     .opacity(0.5)
             }
             
-            if let hours = lineChartController.hours {
+            if let hours = lineChartController.hours, hours.count > indexPosition {
                 let hour = hours[indexPosition]
                 Text(hour)
                     .opacity(0.5)
             }
             
-            Text("\(lineChartController.prices[indexPosition], specifier: "%.2f")")
-                .foregroundColor(lineChartController.labelColor)
+            if lineChartController.prices.count > indexPosition {
+                Text("$\(lineChartController.prices[indexPosition], specifier: "%.2f")")
+                    .foregroundColor(lineChartController.labelColor)
+            }
         }
     }
     
-    /*
-     Take string in format yy-MM-dd (2021-01-01) and transform it
-     to long default string format
-     */
+    // By default, this function takes string in format yy-MM-dd (2021-01-01) and transform it to medium default string format
     public func formatStringDate(_ stringDate: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = lineChartController.dateFormat
         let date = dateFormatter.date(from: stringDate)
         
         // Format date to the final format
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = lineChartController.labelDateFormat
         let finalDate = dateFormatter.string(from: date!)
         
         return finalDate
